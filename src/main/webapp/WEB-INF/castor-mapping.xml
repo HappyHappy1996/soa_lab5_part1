@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mapping>
-        <class name="org.krams.tutorial.oxm.SubscriptionRequest">
-           <map-to xml="subscriptionRequest" ns-uri="http://krams915.blogspot.com/ws/schema/oss"/>
+        <class name="org.krams.tutorial.oxm.DepartmentRequest">
+           <map-to xml="departmentRequest" ns-uri="http://krams915.blogspot.com/ws/schema/oss"/>
            
            <field name="id" type="string">
               <bind-xml name="id" node="element"/>
@@ -10,18 +10,10 @@
            <field name="name" type="string">
               <bind-xml name="name" node="element"/>
            </field>
-           
-           <field name="email" type="string">
-              <bind-xml name="email" node="element"/>
-           </field>
         </class>
         
-        <class name="org.krams.tutorial.oxm.SubscriptionResponse">
-           <map-to xml="subscriptionResponse" ns-uri="http://krams915.blogspot.com/ws/schema/oss"/>
-      
-           <field name="code" type="string">
-              <bind-xml name="code" node="element"/>
-           </field>
+        <class name="org.krams.tutorial.oxm.DepartmentResponse">
+           <map-to xml="departmentResponse" ns-uri="http://krams915.blogspot.com/ws/schema/oss"/>
            
            <field name="description" type="string">
               <bind-xml name="description" node="element"/>

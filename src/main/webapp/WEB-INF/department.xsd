@@ -9,7 +9,7 @@
         <simpleType>
             <restriction base="string">
                 <pattern value="([0-9])+"/>
-                <minLength value="7"/>
+                <minLength value="1"/>
             </restriction>
         </simpleType>
     </element>
@@ -23,24 +23,6 @@
         </simpleType>
     </element>
     
-    <element name="email" tns:maxOccurs="1" tns:minOccurs="1">
-        <simpleType>
-            <restriction base="string">
-           		<pattern value="[A-Za-z0-9._%+-]+@([A-Za-z0-9-]+\.)+([A-Za-z0-9]{2,4})"/>
-	            <minLength value="6"/>
-            </restriction>
-        </simpleType>
-    </element>
-    
-    <element name="code" tns:maxOccurs="1" tns:minOccurs="1">
-        <simpleType>
-            <restriction base="string">
-                 <enumeration value="SUCCESS"/>
-      			 <enumeration value="FAILURE"/>
-            </restriction>
-        </simpleType>
-    </element>
-    
     <element name="description" tns:maxOccurs="1" tns:minOccurs="1">
         <simpleType >
             <restriction base="string" >
@@ -48,20 +30,18 @@
         </simpleType>
     </element>
     
-    <element name="subscriptionRequest" tns:maxOccurs="1" tns:minOccurs="1">
+    <element name="departmentRequest" tns:maxOccurs="1" tns:minOccurs="1">
 		<complexType >
 			<sequence>
 				<element ref="tns:id" />
 				<element ref="tns:name" />
-				<element ref="tns:email" />
 			</sequence>
 		</complexType>
     </element>
     
-    <element name="subscriptionResponse" tns:maxOccurs="1" tns:minOccurs="1">
+    <element name="departmentResponse" tns:maxOccurs="1" tns:minOccurs="1">
     	<complexType>
 			<sequence>
-				<element ref="tns:code" />
 				<element ref="tns:description" />
 			</sequence>
 		</complexType>

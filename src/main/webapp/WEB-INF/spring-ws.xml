@@ -1,84 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" 
-				xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-				xmlns:p="http://www.springframework.org/schema/p" 
-				xmlns:sws="http://www.springframework.org/schema/web-services"
-    			xmlns:oxm="http://www.springframework.org/schema/oxm"
-       			xsi:schemaLocation=
-       				"http://www.springframework.org/schema/beans 
-       				http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-       	 			http://www.springframework.org/schema/web-services
-       				http://www.springframework.org/schema/web-services/web-services-2.0.xsd
-       				http://www.springframework.org/schema/oxm 
-       				http://www.springframework.org/schema/oxm/spring-oxm-1.5.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:sws="http://www.springframework.org/schema/web-services"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+  http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+  http://www.springframework.org/schema/aop
+  http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+  http://www.springframework.org/schema/context
+  http://www.springframework.org/schema/context/spring-context-2.5.xsd
+  http://www.springframework.org/schema/tx
+  http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
 
     <description>
         This web application context contains Spring-WS beans. The beans defined in this context are automatically
         detected by Spring-WS, similar to the way Controllers are picked up in Spring Web MVC.
     </description>
- 
+
  	<!--
-		We have two important URLa: 
-		WSDL: http://localhost:8080/{projectName}/{root-path}/ws/{bean-name}.wsdl 
-		Example: http://localhost:8080/spring-ws/krams/ws/subscription.wsdl
-		
+		We have two important URLa:
+		WSDL: http://localhost:8080/{projectName}/{root-path}/ws/{bean-name}.wsdl
+		Example: http://localhost:8080/spring-ws/krams/ws/department.wsdl
+
 		Endpoint: http://localhost:8080/{projectName}/{root-path}/ws
 		Example: http://localhost:8080/spring-ws/krams/ws
-		
+
 		These urls are based on the root path declared in the web.xml and in the SimpleUrlHandlerMapping
 	-->
-	
- 	<!-- Uses the latest feature from 2.0.0 RC2. 
+
+ 	<!-- Uses the latest feature from 2.0.0 RC2.
 	 	Enables @Endpoint and related Spring-WS annotations. See Spring WS Reference 5.4-->
 	 <sws:annotation-driven />
-	 
-	 <!-- Uses the latest feature from 2.0.0 RC2. 
+
+	 <!-- Uses the latest feature from 2.0.0 RC2.
 	 	Enables interceptor endpoints. See Spring WS Reference 5.5.2
 	 	Here we have an interceptor that validates XML request and a logger
 	    -->
 	 <sws:interceptors>
 	 	    <bean id="validatingInterceptor"  class="org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor"
-				        p:schema="/WEB-INF/subscription.xsd"
+				        p:schema="/WEB-INF/department.xsd"
 				        p:validateRequest="true"
 				        p:validateResponse="true"/>
 
 		    <bean id="loggingInterceptor" class="org.springframework.ws.server.endpoint.interceptor.PayloadLoggingInterceptor"/>
 	 </sws:interceptors>
 
-	<!-- Uses the latest feature from 2.0.0 RC2. 
+	<!-- Uses the latest feature from 2.0.0 RC2.
 	 	Enables publishing of wsdl. See Spring WS Reference 3.7
 	 	For dynamic location transformation to work, a special parameter must be added to the web.xml.
-	 	The locationUri here has no use when integrated with Spring MVC because 
+	 	The locationUri here has no use when integrated with Spring MVC because
 	 	it has been overriden by the SimpleUrlHandlerMapping -->
-    <sws:dynamic-wsdl id="subscription"                                                           
-	    portTypeName="SubscriptionPort"                                                         
-	    locationUri="/"                                                       
-	    targetNamespace="http://krams915.blogspot.com/ws/schema/oss">                               
-	  <sws:xsd location="/WEB-INF/subscription.xsd"/>                                                  
+    <sws:dynamic-wsdl id="department"
+	    portTypeName="DepartmentPort"
+	    locationUri="/"
+	    targetNamespace="http://krams915.blogspot.com/ws/schema/oss">
+	  <sws:xsd location="/WEB-INF/department.xsd"/>
 	</sws:dynamic-wsdl>
 
 	<!--  Our mashaller. You can use any marshaller you want.
 	 For info on how to use Castor, see http://www.castor.org/xml-mapping.html#2.1-Marshalling-Behavior -->
 	<bean id="castorMarshaller" class="org.springframework.oxm.castor.CastorMarshaller"
     	p:mappingLocation="/WEB-INF/castor-mapping.xml" />
- 
+
  	<!-- Normally we use the GenericMarshallingMethodEndpointAdapter however if you read the Spring WS 2.0 API for this adapter:
  	 "Deprecated. as of Spring Web Services 2.0, in favor of DefaultMethodEndpointAdapter and MarshallingPayloadMethodProcessor."
  	 See http://static.springsource.org/spring-ws/sites/2.0/apidocs/org/springframework/ws/server/endpoint/adapter/GenericMarshallingMethodEndpointAdapter.html
- 	 
+
  	 So we have to implement using the recommended implementation. The advantage of these two classes is that
  	 we have a pluggable adapter. For more info, check the Spring WS 2.0 API and its source code.
  	 -->
 	<bean id="marshallingPayloadMethodProcessor" class="org.springframework.ws.server.endpoint.adapter.method.MarshallingPayloadMethodProcessor">
 		<constructor-arg ref="castorMarshaller"/>
-		<constructor-arg ref="castorMarshaller"/>
 	</bean>
-	
+
 	<bean id="defaultMethodEndpointAdapter" class="org.springframework.ws.server.endpoint.adapter.DefaultMethodEndpointAdapter">
 		<property name="methodArgumentResolvers">
 			<list>
 				<ref bean="marshallingPayloadMethodProcessor"/>
-			</list>	
+			</list>
 		</property>
 		<property name="methodReturnValueHandlers">
 			<list>

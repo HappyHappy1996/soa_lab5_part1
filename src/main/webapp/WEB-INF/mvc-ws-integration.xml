@@ -63,7 +63,7 @@
         <property name="mappings">
 			<value>
 				/ws=messageDispatcher
-				/ws/subscription.wsdl=subscription
+				/ws/department.wsdl=department
 			</value>
 		</property> 
     </bean>

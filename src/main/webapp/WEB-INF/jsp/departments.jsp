@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<h1>Subscribers</h1>
+<h1>Departments</h1>
 
 <table>
 	<tr>
@@ -21,7 +21,6 @@
 		<tr>
 			<td><c:out value="${subscription.id}" /></td>
 			<td><c:out value="${subscription.name}" /></td>
-			<td><c:out value="${subscription.email}" /></td>
 		</tr>
 	</c:forEach>
 </table>
