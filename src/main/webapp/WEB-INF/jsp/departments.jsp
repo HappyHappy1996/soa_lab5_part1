@@ -15,7 +15,6 @@
 	<tr>
 		<td width="150">Id</td>
 		<td width="150">Name</td>
-		<td width="150">Email</td>
 	</tr>
 	<c:forEach items="${subscriptions}" var="subscription">
 		<tr>

@@ -15,7 +15,7 @@ public class DepartmentService {
 
     protected static Logger logger = Logger.getLogger("service");
 
-    private Map<String, DepartmentRequest> departments = new HashMap<String, DepartmentRequest>();
+    private static Map<String, DepartmentRequest> departments = new HashMap<String, DepartmentRequest>();
 
     public void doAdd(DepartmentRequest departmentRequest) {
         // Search HashMap

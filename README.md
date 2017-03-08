@@ -2,7 +2,9 @@
 
 usage:
 e.g.
-http://localhost:8080/krams/main/subscribers
-http://localhost:8080/krams/ws/subscription.wsdl
+http://localhost:8080/regular/main/departments
+http://localhost:8080/krams/ws/department.wsdl
 
 i.e. without "/spring-ws/"
+
+path in soap ui - http://localhost:8080/krams/main/departments
