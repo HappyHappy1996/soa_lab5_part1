@@ -17,17 +17,6 @@
         detected by Spring-WS, similar to the way Controllers are picked up in Spring Web MVC.
     </description>
 
- 	<!--
-		We have two important URLa:
-		WSDL: http://localhost:8080/{projectName}/{root-path}/ws/{bean-name}.wsdl
-		Example: http://localhost:8080/spring-ws/krams/ws/department.wsdl
-
-		Endpoint: http://localhost:8080/{projectName}/{root-path}/ws
-		Example: http://localhost:8080/spring-ws/krams/ws
-
-		These urls are based on the root path declared in the web.xml and in the SimpleUrlHandlerMapping
-	-->
-
  	<!-- Uses the latest feature from 2.0.0 RC2.
 	 	Enables @Endpoint and related Spring-WS annotations. See Spring WS Reference 5.4-->
 	 <sws:annotation-driven />
@@ -38,7 +27,7 @@
 	    -->
 	 <sws:interceptors>
 	 	    <bean id="validatingInterceptor"  class="org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor"
-				        p:schema="/WEB-INF/department.xsd"
+				        p:schema="/WEB-INF/task.xsd"
 				        p:validateRequest="true"
 				        p:validateResponse="true"/>
 
@@ -50,11 +39,11 @@
 	 	For dynamic location transformation to work, a special parameter must be added to the web.xml.
 	 	The locationUri here has no use when integrated with Spring MVC because
 	 	it has been overriden by the SimpleUrlHandlerMapping -->
-    <sws:dynamic-wsdl id="department"
-	    portTypeName="DepartmentPort"
+    <sws:dynamic-wsdl id="task"
+	    portTypeName="TaskPort"
 	    locationUri="/"
 	    targetNamespace="http://krams915.blogspot.com/ws/schema/oss">
-	  <sws:xsd location="/WEB-INF/department.xsd"/>
+	  <sws:xsd location="/WEB-INF/task.xsd"/>
 	</sws:dynamic-wsdl>
 
 	<!--  Our mashaller. You can use any marshaller you want.

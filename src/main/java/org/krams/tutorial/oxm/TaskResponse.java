@@ -3,7 +3,7 @@ package org.krams.tutorial.oxm;
 /**
  * Created by happy on 3/8/17.
  */
-public class DepartmentResponse {
+public class TaskResponse {
 
     private String description;
 

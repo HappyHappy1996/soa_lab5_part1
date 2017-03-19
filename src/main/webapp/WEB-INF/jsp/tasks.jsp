@@ -9,17 +9,19 @@
 </head>
 <body>
 
-<h1>Departments</h1>
+<h1>Tasks</h1>
 
 <table>
 	<tr>
 		<td width="150">Id</td>
-		<td width="150">Name</td>
+		<td width="150">Task text</td>
+		<td width="150">Report type</td>
 	</tr>
 	<c:forEach items="${subscriptions}" var="subscription">
 		<tr>
 			<td><c:out value="${subscription.id}" /></td>
-			<td><c:out value="${subscription.name}" /></td>
+			<td><c:out value="${subscription.taskText}" /></td>
+			<td><c:out value="${subscription.reportType}" /></td>
 		</tr>
 	</c:forEach>
 </table>

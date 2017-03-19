@@ -14,10 +14,17 @@
         </simpleType>
     </element>
         
-	<element name="name" tns:maxOccurs="1" tns:minOccurs="1">
+	<element name="taskText" tns:maxOccurs="1" tns:minOccurs="1">
         <simpleType>
             <restriction base="string">
-                <pattern value="([A-Z]|[a-z]|\s|\.)+"/>
+                <minLength value="3"/>
+            </restriction>
+        </simpleType>
+    </element>
+
+    <element name="reportType" tns:maxOccurs="1" tns:minOccurs="1">
+        <simpleType>
+            <restriction base="string">
                 <minLength value="3"/>
             </restriction>
         </simpleType>
@@ -25,21 +32,23 @@
     
     <element name="description" tns:maxOccurs="1" tns:minOccurs="1">
         <simpleType >
-            <restriction base="string" >
+            <restriction base="string">
+                <minLength value="3"/>
             </restriction>
         </simpleType>
     </element>
     
-    <element name="departmentRequest" tns:maxOccurs="1" tns:minOccurs="1">
+    <element name="taskRequest" tns:maxOccurs="1" tns:minOccurs="1">
 		<complexType >
 			<sequence>
 				<element ref="tns:id" />
-				<element ref="tns:name" />
+				<element ref="tns:taskText" />
+				<element ref="tns:reportType" />
 			</sequence>
 		</complexType>
     </element>
     
-    <element name="departmentResponse" tns:maxOccurs="1" tns:minOccurs="1">
+    <element name="taskResponse" tns:maxOccurs="1" tns:minOccurs="1">
     	<complexType>
 			<sequence>
 				<element ref="tns:description" />

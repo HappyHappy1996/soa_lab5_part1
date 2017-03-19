@@ -3,7 +3,7 @@ package org.krams.tutorial.controller;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
-import org.krams.tutorial.service.DepartmentService;
+import org.krams.tutorial.service.TaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,16 +15,16 @@ public class MainController {
 
 	private static Logger logger = Logger.getLogger("controller");
 	
-	@Resource(name="departmentService")
-	private DepartmentService departmentService;
+	@Resource(name="taskService")
+	private TaskService taskService;
 	
-    @RequestMapping(value = "/departments", method = RequestMethod.GET)
-    public String getDepartmentsPage(Model model) {
-    	logger.debug("Received request to show departments page");
+    @RequestMapping(value = "/tasks", method = RequestMethod.GET)
+    public String getTaskPage(Model model) {
+    	logger.debug("Received request to show task page");
     
-    	model.addAttribute("subscriptions",  departmentService.getAll());
+    	model.addAttribute("subscriptions",  taskService.getAll());
     	
-    	return "departments";
+    	return "tasks";
 	}
     
 }
